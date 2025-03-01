@@ -26,6 +26,11 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Set document title dynamically
+  useEffect(() => {
+    document.title = "Obsidian Capital Collective | Building Brands in Emerging Markets";
+  }, []);
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="obsidian-theme">
       <div className="min-h-screen bg-background text-foreground flex flex-col">
