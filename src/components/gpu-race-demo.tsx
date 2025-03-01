@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Bot, User, ShoppingCart, Clock, CheckCircle2, AlertCircle, RefreshCw } from 'lucide-react';
 
@@ -9,8 +9,6 @@ export function GpuRaceDemo() {
   const [winner, setWinner] = useState<'bot' | 'human' | null>(null);
   const [showStats, setShowStats] = useState(false);
   const [raceTime, setRaceTime] = useState({ bot: 0, human: 0 });
-  const [raceStage, setRaceStage] = useState<'idle' | 'searching' | 'adding' | 'checkout' | 'complete'>('idle');
-  const [stageText, setStageText] = useState('');
   const [botStageText, setBotStageText] = useState('');
   const [humanStageText, setHumanStageText] = useState('');
   
@@ -46,7 +44,6 @@ export function GpuRaceDemo() {
     setWinner(null);
     setShowStats(false);
     setIsRacing(true);
-    setRaceStage('searching');
     setBotStageText('Initializing...');
     setHumanStageText('Loading website...');
     
@@ -66,7 +63,6 @@ export function GpuRaceDemo() {
         // Update stage based on progress
         for (const stage of stages) {
           if (prev < stage.threshold && newProgress >= stage.threshold) {
-            setRaceStage(stage.name as any);
             setBotStageText(stage.botText);
             break;
           }
@@ -201,7 +197,6 @@ export function GpuRaceDemo() {
     setWinner(null);
     setShowStats(false);
     setIsRacing(false);
-    setRaceStage('idle');
     setBotStageText('');
     setHumanStageText('');
     raceTimeRef.current = { start: 0, botEnd: 0, humanEnd: 0 };
